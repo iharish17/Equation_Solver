@@ -1,0 +1,155 @@
+ body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(125deg, #93f9b9 0%, #1d8cf8 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .calculator {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(40, 160, 200, 0.25);
+      padding: 32px 24px;
+      width: 420px;
+      max-width: 95vw;
+    }
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      color: #209ce2;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .mode-choice {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .mode-choice select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #6bc7f0;
+      font-size: 1rem;
+      background: #eaf6ff;
+      color: #1c86e3;
+      margin-left: 8px;
+    }
+    form label {
+      display: block;
+      margin-top: 14px;
+      color: #3b4468;
+      font-weight: 600;
+    }
+    .equation-row {
+      margin-bottom: 16px;
+    }
+    .inputs-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 8px;
+      flex-wrap: nowrap;
+    }
+    .inputs-row input {
+      width: 60px;
+      padding: 6px;
+      font-size: 1rem;
+      border: 1px solid #c0c9ea;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .inputs-row span {
+      font-size: 1.12rem;
+      color: #1398cd;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .solve-btn {
+      background: linear-gradient(90deg, #38ef7d, #11998e);
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.12rem;
+      width: 100%;
+      margin-top: 24px;
+      cursor: pointer;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(40, 160, 200, 0.15);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .solve-btn:hover {
+      background: linear-gradient(90deg, #1eacad, #38ef7d);
+      box-shadow: 0 8px 18px rgba(30, 220, 120, 0.24);
+    }
+    .result {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 1.18rem;
+      color: #295b6e;
+      min-height: 32px;
+    }
+
+    /* Modal styles */
+    .modal-bg {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(30, 162, 220, 0.23);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadein 0.3s;
+    }
+    .modal-box {
+      background: #fff;
+      min-width: 320px;
+      border-radius: 20px;
+      box-shadow: 0 10px 36px rgba(30, 180, 220, 0.34);
+      padding: 32px 28px;
+      position: relative;
+      text-align: center;
+      animation: popin 0.27s;
+    }
+    .modal-close {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #049b95;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.18s;
+    }
+    .modal-close:hover {
+      color: #e74c3c;
+    }
+    .modal-ans {
+      font-size: 1.14rem;
+      color: #2283ac;
+      margin-top: 10px;
+      white-space: pre-line;
+    }
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes popin {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }

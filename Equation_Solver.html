@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Equation System Solver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="title">System of Equations Solver</div>
+    <div class="mode-choice">
+      <label for="mode">Variables:</label>
+      <select id="mode" onchange="renderInputs()">
+        <option value="2">2 Variables</option>
+        <option value="3">3 Variables</option>
+      </select>
+    </div>
+    <form id="solverForm" onsubmit="return false;">
+      <div id="inputs-area"></div>
+      <button class="solve-btn" onclick="solveSystem()">Solve</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+  <div class="modal-bg" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-ans" id="modalAns"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
