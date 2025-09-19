@@ -2,416 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Responsive Equation Solver Calculator</title>
+  <title>Equation Solvers with Toggle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --gradient-bg: linear-gradient(125deg, #93f9b9 0%, #1d8cf8 100%);
-      --modal-bg: rgba(30, 162, 220, 0.23);
-      --primary: #209ce2;
-      --accent: #38ef7d;
-      --secondary: #11998e;
-    }
-    body {
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-      background: var(--gradient-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .calculator {
-      background: #fff;
-      border-radius: 22px;
-      box-shadow: 0 8px 36px rgba(40, 160, 200, 0.17);
-      padding: 32px 16px 24px 16px;
-      width: 98vw;
-      max-width: 420px;
-      margin: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .title {
-      text-align: center;
-      font-size: 2.2rem;
-      color: var(--primary);
-      font-weight: bold;
-      margin-bottom: 14px;
-      letter-spacing: 1px;
-      line-height: 1.2;
-    }
-    .mode-choice {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 18px;
-      width: 100%;
-    }
-    .mode-choice label {
-      font-size: 1.12em;
-      margin-right: 8px;
-      color: #2c3e50;
-      font-weight: 500;
-    }
-    .mode-choice select {
-      padding: 9px 14px;
-      border-radius: 8px;
-      border: 1px solid #6bc7f0;
-      font-size: 1rem;
-      background: #eaf6ff;
-      color: #1c86e3;
-      font-weight: 500;
-      transition: border-color 0.18s;
-    }
-    form {
-      width: 100%;
-    }
-    form label {
-      display: block;
-      margin-top: 15px;
-      color: #3b4468;
-      font-weight: 600;
-      font-size: 1.05em;
-    }
-    .equation-row {
-      margin-bottom: 18px;
-      width: 100%;
-    }
-    .inputs-row {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-      margin-top: 8px;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-    .inputs-row input {
-      flex: 1 0 45px;
-      min-width: 45px;
-      max-width: 70px;
-      padding: 6px;
-      font-size: 1rem;
-      border: 1px solid #c0c9ea;
-      border-radius: 6px;
-      text-align: center;
-      transition: border-color 0.17s;
-      box-sizing: border-box;
-    }
-    .inputs-row input:focus {
-      border-color: var(--accent);
-      outline: none;
-    }
-    .inputs-row span {
-      font-size: 1.08rem;
-      color: #1398cd;
-      font-weight: bold;
-      white-space: nowrap;
-      margin: 0 2px;
-    }
-    .solve-btn {
-      background: linear-gradient(90deg, var(--accent), var(--secondary));
-      color: #fff;
-      padding: 13px 0;
-      border: none;
-      border-radius: 9px;
-      font-size: 1.18rem;
-      font-weight: 600;
-      margin-top: 28px;
-      width: 96%;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 14px rgba(40,160,200,0.11);
-      transition: background 0.17s;
-    }
-    .solve-btn:hover {
-      background: linear-gradient(90deg, #1eacad, #38ef7d);
-      box-shadow: 0 8px 18px rgba(30,220,120,0.14);
-    }
-    .result {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 1.14rem;
-      color: #295b6e;
-      min-height: 28px;
-      font-weight: 500;
-    }
-    /* Modal styles */
-    .modal-bg {
-      position: fixed;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--modal-bg);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      animation: fadein 0.27s;
-    }
-    .modal-box {
-      background: #fff;
-      min-width: 220px;
-      border-radius: 19px;
-      box-shadow: 0 12px 44px rgba(30,180,220,0.23);
-      padding: 24px 19px;
-      position: relative;
-      text-align: center;
-      animation: popin 0.25s;
-      font-size: 1.07rem;
-    }
-    .modal-close {
-      position: absolute;
-      right: 14px;
-      top: 12px;
-      background: none;
-      border: none;
-      font-size: 1.5em;
-      color: #049b95;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.15s;
-    }
-    .modal-close:hover {
-      color: #e74c3c;
-    }
-    .modal-ans {
-      font-size: 1.13rem;
-      color: #2283ac;
-      margin-top: 10px;
-      white-space: pre-line;
-      font-weight: 600;
-    }
-    @keyframes fadein {
-      from {opacity: 0;}
-      to   {opacity: 1;}
-    }
-    @keyframes popin {
-      from {transform: scale(.85);}
-      to   {transform: scale(1);}
-    }
-    /* Mobile & tablet adjustments */
-    @media (max-width: 600px) {
-      .calculator {
-        padding: 20px 4px 16px 4px;
-        min-width: 0;
-        max-width: 99vw;
-        margin: 7px;
-      }
-      .title { font-size: 1.4rem;}
-      .solve-btn {font-size: 1rem; padding: 11px 0;}
-      .inputs-row input { font-size: .98rem; min-width: 34px; max-width: 48px;}
-      .mode-choice label { font-size: 1em;}
-      .modal-box { padding: 17px 7px;}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="calculator">
-    <div class="title">System of Equations Solver</div>
-    <div class="mode-choice">
+  <div class="container">
+    <h2>Equation Solvers</h2>
+    <div class="toggle-buttons">
+      <button id="btnQuadratic" class="toggle-btn active" type="button">Quadratic Solver</button>
+      <button id="btnSystem" class="toggle-btn" type="button">System of Equations</button>
+    </div>
+
+    <!-- Quadratic Solver -->
+    <section id="quadraticSection" class="solver-section active">
+      <label>Equation format: ax² + bx + c = 0</label>
+      <div class="inputs-row">
+        <input id="qa" type="number" step="any" placeholder="a" />
+        <span>x² +</span>
+        <input id="qb" type="number" step="any" placeholder="b" />
+        <span>x +</span>
+        <input id="qc" type="number" step="any" placeholder="c" />
+        <span>= 0</span>
+      </div>
+      <button id="solveQuadraticBtn" class="solve-btn">Solve Quadratic</button>
+      <div id="quadResult" class="result"></div>
+    </section>
+
+    <!-- System of Equations Solver -->
+    <section id="systemSection" class="solver-section">
       <label for="mode">Variables:</label>
-      <select id="mode" onchange="renderInputs()">
+      <select id="mode">
         <option value="2">2 Variables</option>
         <option value="3">3 Variables</option>
       </select>
-    </div>
-    <form id="solverForm" onsubmit="return false;">
-      <div id="inputs-area"></div>
-      <button class="solve-btn" onclick="solveSystem()">Solve</button>
-    </form>
-    <div class="result" id="result"></div>
+      <form id="solverForm" onsubmit="return false;">
+        <div id="inputs-area"></div>
+        <button id="solveSystemBtn" class="solve-btn">Solve System</button>
+      </form>
+      <div id="result" class="result"></div>
+    </section>
   </div>
-  <div class="modal-bg" id="modal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <div class="modal-ans" id="modalAns"></div>
-    </div>
-  </div>
-  <script>
-    const inputsArea = document.getElementById('inputs-area');
-    function renderInputs() {
-      let mode = document.getElementById('mode').value;
-      let html = '';
-      if (mode === '2') {
-        html += `<div class="equation-row">
-          <label>Equation 1: <em>ax + by = c</em></label>
-          <div class="inputs-row">
-            <input id="a1" type="number" step="any" placeholder="a" />
-            <span>x +</span>
-            <input id="b1" type="number" step="any" placeholder="b" />
-            <span>y =</span>
-            <input id="c1" type="number" step="any" placeholder="c" />
-          </div>
-        </div>`;
-        html += `<div class="equation-row">
-          <label>Equation 2: <em>dx + ey = f</em></label>
-          <div class="inputs-row">
-            <input id="a2" type="number" step="any" placeholder="d" />
-            <span>x +</span>
-            <input id="b2" type="number" step="any" placeholder="e" />
-            <span>y =</span>
-            <input id="c2" type="number" step="any" placeholder="f" />
-          </div>
-        </div>`;
-      } else {
-        html += `<div class="equation-row">
-          <label>Equation 1: <em>a₁x + b₁y + c₁z = d₁</em></label>
-          <div class="inputs-row">
-            <input id="a1" type="number" step="any" placeholder="a₁" />
-            <span>x +</span>
-            <input id="b1" type="number" step="any" placeholder="b₁" />
-            <span>y +</span>
-            <input id="c1" type="number" step="any" placeholder="c₁" />
-            <span>z =</span>
-            <input id="d1" type="number" step="any" placeholder="d₁" />
-          </div>
-        </div>`;
-        html += `<div class="equation-row">
-          <label>Equation 2: <em>a₂x + b₂y + c₂z = d₂</em></label>
-          <div class="inputs-row">
-            <input id="a2" type="number" step="any" placeholder="a₂" />
-            <span>x +</span>
-            <input id="b2" type="number" step="any" placeholder="b₂" />
-            <span>y +</span>
-            <input id="c2" type="number" step="any" placeholder="c₂" />
-            <span>z =</span>
-            <input id="d2" type="number" step="any" placeholder="d₂" />
-          </div>
-        </div>`;
-        html += `<div class="equation-row">
-          <label>Equation 3: <em>a₃x + b₃y + c₃z = d₃</em></label>
-          <div class="inputs-row">
-            <input id="a3" type="number" step="any" placeholder="a₃" />
-            <span>x +</span>
-            <input id="b3" type="number" step="any" placeholder="b₃" />
-            <span>y +</span>
-            <input id="c3" type="number" step="any" placeholder="c₃" />
-            <span>z =</span>
-            <input id="d3" type="number" step="any" placeholder="d₃" />
-          </div>
-        </div>`;
-      }
-      inputsArea.innerHTML = html;
-      document.getElementById('result').innerHTML = '';
-    }
-    renderInputs();
 
-    function solveSystem() {
-      let mode = document.getElementById('mode').value;
-      let resultEl = document.getElementById('result');
-      let modalAns = document.getElementById('modalAns');
-      let modal = document.getElementById('modal');
-
-      if (mode === '2') {
-        let a1 = parseFloat(document.getElementById("a1").value);
-        let b1 = parseFloat(document.getElementById("b1").value);
-        let c1 = parseFloat(document.getElementById("c1").value);
-        let a2 = parseFloat(document.getElementById("a2").value);
-        let b2 = parseFloat(document.getElementById("b2").value);
-        let c2 = parseFloat(document.getElementById("c2").value);
-
-        if ([a1, b1, c1, a2, b2, c2].some(v => isNaN(v))) {
-          resultEl.textContent = "Please fill all fields with numbers.";
-          modalAns.textContent = "Please fill all fields with numbers.";
-          showModal();
-          return;
-        }
-
-        let det = a1 * b2 - a2 * b1;
-        if (det === 0) {
-          resultEl.textContent = "No unique solution exists.";
-          modalAns.textContent = "No unique solution exists.";
-          showModal();
-          return;
-        }
-
-        let x = (c1 * b2 - c2 * b1) / det;
-        let y = (a1 * c2 - a2 * c1) / det;
-        let sol = `x = ${x.toPrecision(6)}, y = ${y.toPrecision(6)}`;
-        resultEl.innerHTML = `<strong>Solution:</strong> ${sol}`;
-        modalAns.innerHTML = `<strong>Solution:</strong><br>${sol}`;
-        showModal();
-
-      } else {
-        let a1 = parseFloat(document.getElementById("a1").value);
-        let b1 = parseFloat(document.getElementById("b1").value);
-        let c1 = parseFloat(document.getElementById("c1").value);
-        let d1 = parseFloat(document.getElementById("d1").value);
-        let a2 = parseFloat(document.getElementById("a2").value);
-        let b2 = parseFloat(document.getElementById("b2").value);
-        let c2 = parseFloat(document.getElementById("c2").value);
-        let d2 = parseFloat(document.getElementById("d2").value);
-        let a3 = parseFloat(document.getElementById("a3").value);
-        let b3 = parseFloat(document.getElementById("b3").value);
-        let c3 = parseFloat(document.getElementById("c3").value);
-        let d3 = parseFloat(document.getElementById("d3").value);
-
-        if ([a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3].some(v => isNaN(v))) {
-          resultEl.textContent = "Please fill all fields with numbers.";
-          modalAns.textContent = "Please fill all fields with numbers.";
-          showModal();
-          return;
-        }
-
-        function det3(m) {
-          return (
-            m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2]) -
-            m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
-            m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0])
-          );
-        }
-        let d = [
-          [a1, b1, c1],
-          [a2, b2, c2],
-          [a3, b3, c3],
-        ];
-        let dx = [
-          [d1, b1, c1],
-          [d2, b2, c2],
-          [d3, b3, c3],
-        ];
-        let dy = [
-          [a1, d1, c1],
-          [a2, d2, c2],
-          [a3, d3, c3],
-        ];
-        let dz = [
-          [a1, b1, d1],
-          [a2, b2, d2],
-          [a3, b3, d3],
-        ];
-        let D = det3(d);
-        let Dx = det3(dx);
-        let Dy = det3(dy);
-        let Dz = det3(dz);
-
-        if (D === 0) {
-          resultEl.textContent = "No unique solution exists.";
-          modalAns.textContent = "No unique solution exists.";
-          showModal();
-          return;
-        }
-
-        let x = Dx / D,
-          y = Dy / D,
-          z = Dz / D;
-        let sol = `x = ${x.toPrecision(6)}, y = ${y.toPrecision(6)}, z = ${z.toPrecision(6)}`;
-        resultEl.innerHTML = `<strong>Solution:</strong> ${sol}`;
-        modalAns.innerHTML = `<strong>Solution:</strong><br>${sol}`;
-        showModal();
-      }
-    }
-
-    function showModal() {
-      document.getElementById('modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
