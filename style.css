@@ -10,6 +10,7 @@
     }
     body {
       margin: 0;
+      background-image: url('quadratic.png');
       min-height: 100vh;
       font-family: Arial, sans-serif;
       background: var(--gradient-bg);
