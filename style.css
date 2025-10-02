@@ -1,129 +1,154 @@
-    :root {
-      --gradient-bg: linear-gradient(125deg, #91EAE4    0%, #7F7FD5   100%);
-      --primary: #209ce2;
-      --accent: #38ef7d;
-      --secondary: #11998e;
-      --text-color: #2c3e50;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      background-image: url('quadratic.png');
+:root {
+  --gradient-bg: linear-gradient(135deg, #7f7fd5 0%, #91eae4 100%);
+  --primary: #ffd600;
+  --accent: #ffd600;
+  --secondary: #ffd600;
+  --text-color: #fff;
+  --button-text-color: #343434;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+      background-image: var(--gradient-bg);
       background-size: cover; 
       background-repeat: no-repeat;
       background-position: center; 
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-     // background: var(--gradient-bg);
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-    }
-    .container {
-      background: var(--gradient-bg);
-      max-width: 450px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 36px rgba(40, 160, 200, 0.17);
-      text-align: center;
-    }
-    h2 {
-      color: #0e1011ff;
-      margin-bottom: 16px;
-    }
-    .toggle-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .toggle-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(40, 160, 200, 0.11);
-      transition: background 0.25s ease;
-      flex: 1;
-      user-select: none;
-    }
-    .toggle-btn:hover {
-      background: var(--secondary);
-    }
-    .toggle-btn.active {
-      background: var(--primary) !important;
-      box-shadow: 0 6px 20px rgba(30, 140, 230, 0.4);
-    }
-    .solver-section {
-      display: none;
-      text-align: left;
-    }
-    .solver-section.active {
-      display: block;
-      color: #0e1011ff;
-    }
-    label {
-      font-weight: 600;
-      color: var(--text-color);
-      display: block;
-      margin-top: 10px;
-    }
-    input[type=number], select {
-      padding: 8px;
-      font-size: 1rem;
-      border: 1px solid #c0c9ea;
-      border-radius: 6px;
-      text-align: center;
-      width: 60px;
-      margin-right: 8px;
-    }
-    select {
-      width: auto;
-      text-align: left;
-      padding-left: 10px;
-    }
-    button.solve-btn {
-      margin-top: 20px;
-      padding: 12px 0;
-      width: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--secondary));
-      border: none;
-      border-radius: 9px;
-      color: white;
-      font-weight: 600;
-      font-size: 1.15rem;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(40,160,200,0.11);
-      transition: background 0.2s;
-    }
-    button.solve-btn:hover {
-      background: linear-gradient(90deg, #1eacad, #38ef7d);
-    }
-    .result {
-      margin-top: 18px;
-      font-weight: 600;
-      color: #0e1011ff;
-      min-height: 40px;
-      white-space: pre-line;
-    }
-    .inputs-row {
-      display: flex;
-      align-items: center;
-      flex-wrap: nowrap;
-      margin-top: 6px;
-    }
-    .inputs-row span {
-      font-weight: 700;
-      color: #0e1011ff;
-      margin-right: 8px;
-      user-select: none;
-      white-space: nowrap;
-    }
+}
+.container {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  margin-top: 56px;
+}
+h2 {
+  color: var(--primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 26px;
+  margin-top: 18px;
+  text-shadow: 0 3px 18px rgba(60,60,60, 0.09);
+  letter-spacing: 0.02em;
+}
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 34px;
+}
+.toggle-btn {
+  background: var(--accent);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 15px;
+  padding: 18px 36px;
+  font-weight: 700;
+  font-size: 1.18rem;
+  box-shadow: 0 2px 16px rgba(80,80,80,0.11);
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+  outline: none;
+  user-select: none;
+  letter-spacing: 0.01em;
+  margin-bottom: 0;
+}
+.toggle-btn.active, .toggle-btn:hover {
+  filter: brightness(0.92);
+  transform: translateY(-2px) scale(1.03);
+}
+.solver-section {
+  display: none;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 540px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 24px 22px 20px 22px;
+  box-shadow: 0 4px 30px rgba(70,70,150,0.10);
+}
+.solver-section.active {
+  display: block;
+  background: transparent;
+  color: #fafaff;
+}
+label {
+  font-weight: 600;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+.inputs-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 16px 0 0 0;
+  gap: 8px;
+}
+.inputs-row span {
+  font-weight: 700;
+  color: var(--button-text-color);
+  margin-right: 0;
+  user-select: none;
+  font-size: 1.12rem;
+  white-space: nowrap;
+}
+input[type=number], select {
+  padding: 8px 10px;
+  font-size: 1.06rem;
+  border: 1px solid #c0c9ea;
+  border-radius: 6px;
+  text-align: center;
+  width: 70px;
+  margin-right: 0;
+  background: #f6faff;
+  color: #393939;
+}
+select {
+  width: auto;
+  text-align: left;
+  padding-left: 10px;
+}
+button.solve-btn {
+  margin-top: 32px;
+  padding: 16px 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  border: none;
+  border-radius: 13px;
+  color: var(--button-text-color);
+  font-weight: 700;
+  font-size: 1.22rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(80,80,150,0.14);
+  transition: filter 0.13s, transform 0.13s;
+}
+button.solve-btn:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1.5px) scale(1.01);
+  background: linear-gradient(90deg, #ffe766, #ffe766);
+}
+.result {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #fff;
+  min-height: 40px;
+  white-space: pre-line;
+  font-size: 1.12rem;
+  text-shadow: 0 2px 8px rgba(60,60,60, 0.10);
+}
+.equation-row {
+  margin-bottom: 12px;
+}
