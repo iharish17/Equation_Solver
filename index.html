@@ -8,13 +8,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="welcome-banner">
+    <div class="welcome-title">Welcome Maths Lovers!</div>
+    <div class="welcome-description">
+      Explore your passion for mathematics with our carefully curated tools and resources. Click a button below to jump to the tool you want to use.
+    </div>
+    <div class="link-buttons-row">
+      <a href="#" class="link-button">Quadratic Equation Solver</a>
+      <a href="#" class="link-button">Equation Solver</a>
+      <a href="#" class="link-button">Mean, Mode Median</a>
+      <a href="#" class="link-button">Number System</a>
+    </div>
+  </div>
   <div class="container">
-    <h2>Equation Solver</h2>
+    <h2>Equation Solvers</h2>
     <div class="toggle-buttons">
       <button id="btnQuadratic" class="toggle-btn active" type="button">Quadratic Solver</button>
       <button id="btnSystem" class="toggle-btn" type="button">System of Equations</button>
     </div>
-
     <!-- Quadratic Solver -->
     <section id="quadraticSection" class="solver-section active">
       <label>Equation format: ax² + bx + c = 0</label>
@@ -26,10 +37,9 @@
         <input id="qc" type="number" step="any" placeholder="c" />
         <span>= 0</span>
       </div>
-      <button id="solveQuadraticBtn" class="solve-btn">Get Roots</button>
+      <button id="solveQuadraticBtn" class="solve-btn">Solve Quadratic</button>
       <div id="quadResult" class="result"></div>
     </section>
-
     <!-- System of Equations Solver -->
     <section id="systemSection" class="solver-section">
       <label for="mode">Variables:</label>
@@ -39,7 +49,7 @@
       </select>
       <form id="solverForm" onsubmit="return false;">
         <div id="inputs-area"></div>
-        <button id="solveSystemBtn" class="solve-btn">Get Values</button>
+        <button id="solveSystemBtn" class="solve-btn">Solve System</button>
       </form>
       <div id="result" class="result"></div>
     </section>
