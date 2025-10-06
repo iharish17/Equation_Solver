@@ -6,9 +6,6 @@
       --text-color: #fff;
       --button-text-color: #343434;
     }
-    * {
-      box-sizing: border-box;
-    }
     body {
       background-image: var(--gradient-bg);
       background-size: cover;
@@ -30,7 +27,7 @@
       padding-bottom: 14px;
     }
     .welcome-title {
-      color: #ffd600;
+      color: #ffd700;
       font-size: 2.6rem;
       font-weight: 900;
       letter-spacing: 0.018em;
@@ -42,7 +39,7 @@
       font-size: 1.25rem;
       font-weight: 500;
       margin-bottom: 24px;
-}
+    }
 .link-buttons-row {
   display: flex;
   justify-content: center;
@@ -65,7 +62,7 @@
   margin-bottom: 14px;
 }
 .link-button:hover {
-  color: #0077ff;
+  color:#0077ff;
   filter: brightness(0.94);
   transform: translateY(-2px) scale(1.04);
 }
